@@ -1,5 +1,6 @@
 # travelapp
 Aplikasi : https://github.com/indahhsryn/travelapp/blob/master/APK/app-release.apk
+aplikasi akses di drive: https://drive.google.com/file/d/1bwRIRHYDec9L5OO2Ik932J9yJpOuGXPU/view?usp=sharing 
 
 
 A new Flutter project.
