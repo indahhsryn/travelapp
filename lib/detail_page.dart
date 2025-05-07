@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'trip_schedule_page.dart'; // Ganti dengan path file yang sesuai
 
 class DetailPage extends StatelessWidget {
   // Properti yang digunakan untuk menampilkan detail wisata
@@ -90,19 +91,31 @@ class DetailPage extends StatelessWidget {
                   Row(
                     children: [
                       // Tombol pertama: menyimpan ke list liburan
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: () {}, // Aksi ketika tombol ditekan
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.transparent, // Background transparan
-                            side: const BorderSide(color: Colors.white), // Border putih
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20), // Sudut membulat
-                            ),
-                          ),
-                          child: const Text('Masukan List Liburan'),
-                        ),
-                      ),
+                    Expanded(
+  child: ElevatedButton(
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => TripSchedulePage(
+            destinationName: name,
+            destinationImage: image,
+          ),
+        ),
+      );
+    },
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.transparent,
+      side: const BorderSide(color: Colors.white),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+    ),
+    child: const Text('Masukan List Liburan'),
+  ),
+),
+
+
                       const SizedBox(width: 12),
 
                       // Tombol kedua: navigasi ke informasi lainnya

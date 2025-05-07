@@ -64,6 +64,9 @@ flutter:
     - assets/images/parangtritis.jpg  
     - assets/images/malioboro.jpg  
     - assets/images/breksi.jpg
+    - assets/images/onboard1.png
+    - assets/images/onboard2.png
+    - assets/images/onboard3.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

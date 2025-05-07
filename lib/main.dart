@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'detail_page.dart';
+import 'onboarding_page.dart'; // Tambahkan import ini
+
 
 // ------------------ ENTRY POINT ------------------
 
@@ -25,6 +27,7 @@ class TravelApp extends StatelessWidget {
 
 // ------------------ SPLASH SCREEN ------------------
 
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -37,11 +40,11 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    // Timer 3 detik, setelah itu navigasi ke halaman login
+    // Timer 3 detik, setelah itu navigasi ke halaman onboarding
     Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const LoginPage()),
+        MaterialPageRoute(builder: (context) => const OnboardingPage()),
       );
     });
   }
@@ -49,17 +52,17 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Latar belakang putih
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, // Posisikan konten di tengah
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/images/travel_logo.png', // Logo aplikasi
+              'assets/images/travel_logo.png',
               width: 200,
             ),
             const SizedBox(height: 20),
-            // Bisa tambahkan teks atau animasi di sini jika perlu
+            // Tambahkan animasi loading atau teks branding di sini kalau perlu
           ],
         ),
       ),
