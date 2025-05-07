@@ -1,13 +1,23 @@
+// Mengimpor pustaka UI Flutter
 import 'package:flutter/material.dart';
-import 'trip_schedule_page.dart'; // Ganti dengan path file yang sesuai
-import 'main.dart'; // untuk akses LoginPage dari main.dart
 
+// Mengimpor halaman TripSchedule untuk navigasi ketika menambahkan ke daftar liburan
+import 'trip_schedule_page.dart';
+
+// Mengimpor halaman HomePage dari main.dart untuk navigasi ke halaman utama
+import 'main.dart';
+
+// ------------------ DETAIL PAGE ------------------
+
+// Widget Stateless (karena data tidak berubah), menampilkan detail tempat wisata
 class DetailPage extends StatelessWidget {
-  final String name;
-  final String location; // Lokasi belum digunakan di UI
-  final String image;
-  final String description;
+  // Properti yang dibutuhkan untuk menampilkan informasi tempat wisata
+  final String name; // Nama tempat
+  final String location; // Lokasi (belum digunakan di UI)
+  final String image; // Path gambar
+  final String description; // Deskripsi
 
+  // Konstruktor dengan parameter wajib
   const DetailPage({
     super.key,
     required this.name,
@@ -19,24 +29,26 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Stack digunakan untuk menumpuk widget: gambar latar belakang dan konten
       body: Stack(
         children: [
-          // Gambar latar belakang fullscreen
+          // Gambar latar belakang yang menutupi seluruh layar
           Image.asset(
             image,
-            width: double.infinity,
-            height: double.infinity,
-            fit: BoxFit.cover,
+            width: double.infinity, // Lebar layar penuh
+            height: double.infinity, // Tinggi layar penuh
+            fit: BoxFit.cover, // Menyesuaikan gambar agar menutupi layar
           ),
 
-          // Konten di bagian bawah
+          // Konten utama ditampilkan di bagian bawah layar
           Positioned(
             bottom: 0,
             left: 0,
             right: 0,
             child: Container(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16), // Padding isi konten
               decoration: BoxDecoration(
+                // Efek gradasi dari transparan ke hitam agar teks lebih terbaca
                 gradient: LinearGradient(
                   colors: [Colors.transparent, Colors.black.withOpacity(0.7)],
                   begin: Alignment.topCenter,
@@ -44,10 +56,10 @@ class DetailPage extends StatelessWidget {
                 ),
               ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start, // Posisi kiri
+                mainAxisSize: MainAxisSize.min, // Menyesuaikan tinggi dengan isi
                 children: [
-                  // Nama tempat wisata
+                  // Menampilkan nama tempat wisata
                   Text(
                     name,
                     style: const TextStyle(
@@ -58,7 +70,7 @@ class DetailPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
 
-                  // Deskripsi tempat wisata
+                  // Menampilkan deskripsi wisata
                   Text(
                     description,
                     style: const TextStyle(
@@ -68,7 +80,7 @@ class DetailPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
 
-                  // Rating dan ulasan
+                  // Baris bintang untuk rating tempat wisata
                   Row(
                     children: [
                       const Icon(Icons.star, color: Colors.amber, size: 20),
@@ -78,20 +90,21 @@ class DetailPage extends StatelessWidget {
                       const Icon(Icons.star_half, color: Colors.amber, size: 20),
                       const SizedBox(width: 8),
                       const Text(
-                        '4.5 (1.2k reviews)',
+                        '4.5 (1.2k reviews)', // Teks ulasan
                         style: TextStyle(color: Colors.white70),
                       ),
                     ],
                   ),
                   const SizedBox(height: 12),
 
-                  // Tombol aksi
+                  // Baris tombol aksi
                   Row(
                     children: [
                       // Tombol "Masukan List Liburan"
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
+                            // Navigasi ke halaman TripSchedulePage dengan data nama dan gambar tempat
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -103,10 +116,10 @@ class DetailPage extends StatelessWidget {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            side: const BorderSide(color: Colors.white),
+                            backgroundColor: Colors.transparent, // Transparan
+                            side: const BorderSide(color: Colors.white), // Border putih
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(20), // Sudut membulat
                             ),
                           ),
                           child: const Text('Masukan List Liburan'),
@@ -114,10 +127,11 @@ class DetailPage extends StatelessWidget {
                       ),
                       const SizedBox(width: 12),
 
-                      // Tombol "Lihat Lainnya"
+                      // Tombol "Lihat Lainnya" untuk kembali ke halaman utama (HomePage)
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () {
+                            // Navigasi ke halaman HomePage
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -126,7 +140,7 @@ class DetailPage extends StatelessWidget {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
+                            backgroundColor: Colors.white, // Background putih
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
