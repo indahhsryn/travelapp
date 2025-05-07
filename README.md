@@ -1,5 +1,5 @@
 # travelapp
-Aplikasi : https://github.com/indahhsryn/travelapp/blob/master/APK/travel.apk
+Aplikasi : https://github.com/indahhsryn/travelapp/blob/master/APK/app-release.apk
 
 
 A new Flutter project.
