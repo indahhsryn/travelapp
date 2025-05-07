@@ -1,13 +1,18 @@
+// Mengimpor pustaka Material dari Flutter untuk membangun UI
 import 'package:flutter/material.dart';
 
-// Halaman penjadwalan perjalanan (Trip Schedule)
-// Menerima dua parameter dari halaman sebelumnya:
-// - destinationName: nama tempat wisata
-// - destinationImage: gambar tempat wisata
+// ------------------ TRIP SCHEDULE PAGE ------------------
+
+// Halaman ini menampilkan detail rencana perjalanan wisata
+// Menerima data dari halaman sebelumnya berupa:
+// - destinationName: nama tempat tujuan
+// - destinationImage: gambar tempat tujuan
 class TripSchedulePage extends StatelessWidget {
+  // Deklarasi variabel final untuk menyimpan data yang diterima
   final String destinationName;
   final String destinationImage;
 
+  // Konstruktor untuk menerima data melalui parameter
   const TripSchedulePage({
     super.key,
     required this.destinationName,
@@ -17,35 +22,35 @@ class TripSchedulePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // AppBar di bagian atas halaman
+      // AppBar adalah bagian atas halaman yang menampilkan judul dan tombol kembali
       appBar: AppBar(
-        title: const Text('New Plan'), // Judul halaman
+        title: const Text('New Plan'), // Judul halaman di AppBar
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back), // Tombol kembali
-          onPressed: () => Navigator.pop(context), // Navigasi ke halaman sebelumnya
+          icon: const Icon(Icons.arrow_back), // Ikon panah untuk kembali
+          onPressed: () => Navigator.pop(context), // Aksi kembali ke halaman sebelumnya
         ),
       ),
 
-      // Konten utama halaman
+      // Body adalah isi utama dari halaman
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start, // Rata kiri semua elemen
+        crossAxisAlignment: CrossAxisAlignment.start, // Menyusun semua elemen ke kiri
         children: [
-          // Menampilkan gambar destinasi yang dipilih
+          // Menampilkan gambar destinasi wisata
           ClipRRect(
-            borderRadius: BorderRadius.circular(12), // Membuat sudut gambar membulat
+            borderRadius: BorderRadius.circular(12), // Membuat sudut gambar melengkung
             child: Image.asset(
-              destinationImage, // Gambar dari input
-              width: double.infinity, // Lebar gambar sesuai lebar layar
+              destinationImage, // Mengambil path gambar dari parameter
+              width: double.infinity, // Lebar penuh layar
               height: 180, // Tinggi gambar
-              fit: BoxFit.cover, // Menyesuaikan gambar agar tidak terdistorsi
+              fit: BoxFit.cover, // Menyesuaikan gambar agar mengisi area tanpa merusak proporsi
             ),
           ),
 
           // Menampilkan nama destinasi di bawah gambar
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0), // Padding sekitar teks
             child: Text(
-              destinationName, // Nama destinasi dari parameter
+              destinationName, // Menampilkan nama destinasi
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -53,28 +58,28 @@ class TripSchedulePage extends StatelessWidget {
             ),
           ),
 
-          // Label untuk bagian pemilihan tanggal
+          // Label bagian pemilihan tanggal
           const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
+            padding: EdgeInsets.symmetric(horizontal: 16), // Padding kiri-kanan
             child: Text(
-              'Pilih Tanggal', // Judul bagian
+              'Pilih Tanggal', // Judul bagian untuk memilih tanggal rencana
               style: TextStyle(fontSize: 16),
             ),
           ),
 
-          const SizedBox(height: 12), // Jarak antar elemen
+          const SizedBox(height: 12), // Spasi vertikal antar elemen
 
-          // Bagian utama itinerary ditampilkan dalam ListView agar bisa discroll
+          // Daftar jadwal rencana perjalanan yang bisa digulir
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16), // Padding list
               children: const [
-                // Teks penanda hari
+                // Menandai hari ke-1 dan tanggal
                 Text(' 1 - July 14'),
 
-                // Jadwal kegiatan hari itu
+                // ListTile adalah elemen daftar kegiatan
                 ListTile(
-                  leading: Icon(Icons.alarm), // Ikon alarm
+                  leading: Icon(Icons.alarm), // Ikon kegiatan
                   title: Text('5:30 - Berangkat'), // Deskripsi kegiatan
                 ),
                 ListTile(
