@@ -1,17 +1,17 @@
 // ------------------ IMPORT PACKAGE ------------------
-import 'dart:async'; // Untuk penggunaan Timer
-import 'package:flutter/material.dart'; // Mengimpor material UI dari Flutter
+import 'dart:async'; // Untuk penggunaan Timer (menunda aksi)
+import 'package:flutter/material.dart'; // Mengimpor Material UI bawaan Flutter
 import 'detail_page.dart'; // Mengimpor halaman detail tempat wisata
 import 'onboarding_page.dart'; // Mengimpor halaman onboarding
 
 // ------------------ ENTRY POINT ------------------
 
-// Fungsi utama yang akan dijalankan pertama kali saat aplikasi dimulai
+// Fungsi utama yang dijalankan pertama kali saat aplikasi dimulai
 void main() {
-  runApp(const TravelApp()); // Menjalankan aplikasi dengan widget TravelApp sebagai root
+  runApp(const TravelApp()); // Menjalankan aplikasi dengan widget TravelApp sebagai root widget
 }
 
-// Widget utama aplikasi
+// Widget utama dari aplikasi
 class TravelApp extends StatelessWidget {
   const TravelApp({super.key});
 
@@ -19,7 +19,7 @@ class TravelApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Travel App', // Judul aplikasi
-      debugShowCheckedModeBanner: false, // Menghilangkan banner "DEBUG"
+      debugShowCheckedModeBanner: false, // Menghilangkan banner "DEBUG" di pojok kanan atas
       home: const SplashScreen(), // Menampilkan halaman SplashScreen pertama kali
     );
   }
@@ -27,11 +27,12 @@ class TravelApp extends StatelessWidget {
 
 // ------------------ SPLASH SCREEN ------------------
 
+// Halaman pembuka yang muncul sesaat sebelum ke onboarding
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState(); // Membuat state SplashScreen
+  State<SplashScreen> createState() => _SplashScreenState(); // Mengatur state-nya
 }
 
 class _SplashScreenState extends State<SplashScreen> {
@@ -39,11 +40,11 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    // Menjalankan timer selama 3 detik, lalu pindah ke halaman onboarding
+    // Fungsi Timer untuk delay selama 3 detik lalu pindah ke halaman onboarding
     Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const OnboardingPage()),
+        MaterialPageRoute(builder: (context) => const OnboardingPage()), // Navigasi ke onboarding
       );
     });
   }
@@ -51,17 +52,18 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Latar belakang putih
+      backgroundColor: Colors.white, // Warna latar putih
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, // Tengah secara vertikal
+          mainAxisAlignment: MainAxisAlignment.center, // Tengah vertikal
           children: [
+            // Menampilkan logo aplikasi
             Image.asset(
-              'assets/images/travel_logo.png', // Menampilkan logo aplikasi
+              'assets/images/travel_logo.png',
               width: 200,
             ),
-            const SizedBox(height: 20), // Spasi vertikal
-            // Di sini bisa ditambahkan animasi loading seperti CircularProgressIndicator
+            const SizedBox(height: 20), // Jarak antar elemen secara vertikal
+            // Bisa ditambahkan animasi loading di sini (misal: CircularProgressIndicator)
           ],
         ),
       ),
@@ -76,13 +78,13 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold( // Scaffold adalah struktur dasar halaman (memuat appbar, body, dll)
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 40.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start, // Rata kiri semua elemen
           children: [
-            const Icon(Icons.arrow_back), // Ikon kembali (tidak berfungsi untuk sekarang)
+            const Icon(Icons.arrow_back), // Ikon kembali (belum aktif fungsinya)
             const SizedBox(height: 20),
 
             // Judul halaman login
@@ -95,8 +97,8 @@ class LoginPage extends StatelessWidget {
             // Field input username
             TextField(
               decoration: InputDecoration(
-                hintText: 'Enter username', // Placeholder
-                prefixIcon: const Icon(Icons.person_outline), // Ikon di kiri
+                hintText: 'Enter username', // Teks placeholder
+                prefixIcon: const Icon(Icons.person_outline), // Ikon di awal input
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12), // Sudut membulat
                 ),
@@ -107,7 +109,7 @@ class LoginPage extends StatelessWidget {
 
             // Field input password
             TextField(
-              obscureText: true, // Menyembunyikan input
+              obscureText: true, // Menyembunyikan karakter input
               decoration: InputDecoration(
                 hintText: 'Enter password',
                 prefixIcon: const Icon(Icons.lock_outline),
@@ -120,19 +122,19 @@ class LoginPage extends StatelessWidget {
 
             const SizedBox(height: 24),
 
-            // Tombol login — menuju halaman HomePage
+            // Tombol login — akan langsung menuju halaman HomePage
             ElevatedButton(
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (_) => const HomePage()),
+                  MaterialPageRoute(builder: (_) => const HomePage()), // Navigasi ke HomePage
                 );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 13, 54, 123), // Warna biru
-                minimumSize: const Size(double.infinity, 50), // Lebar penuh
+                minimumSize: const Size(double.infinity, 50), // Tombol full width
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(30), // Membuat tombol membulat
                 ),
               ),
               child: const Text(
@@ -143,24 +145,24 @@ class LoginPage extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            // Divider bertuliskan "Or"
+            // Divider horizontal dengan teks "Or"
             Row(
               children: const [
-                Expanded(child: Divider(thickness: 1)), // Garis kiri
+                Expanded(child: Divider(thickness: 1)),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8.0),
                   child: Text("Or"),
                 ),
-                Expanded(child: Divider(thickness: 1)), // Garis kanan
+                Expanded(child: Divider(thickness: 1)),
               ],
             ),
 
             const SizedBox(height: 20),
 
-            // Tombol login menggunakan akun Google
+            // Tombol login Google (dummy)
             ElevatedButton.icon(
               onPressed: () {
-                // tambahkan fitur login Google
+                // Fitur login Google belum diimplementasikan
               },
               label: const Text("Continue with Google"),
               icon: const Icon(Icons.g_mobiledata_rounded),
@@ -186,7 +188,7 @@ class LoginPage extends StatelessWidget {
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  // Data list tempat wisata di Jogja
+  // Data dummy list tempat wisata di Jogja
   final List<Map<String, String>> wisataJogja = const [
     {
       "name": "Candi Prambanan",
@@ -216,15 +218,14 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold( // Struktur utama halaman
       backgroundColor: Colors.white,
-      body: SafeArea(
+      body: SafeArea( // Menghindari notch atau area status bar
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Teks pengantar atas
               const Text(
                 'Find your next trip',
                 style: TextStyle(fontSize: 14, color: Colors.grey),
@@ -232,13 +233,13 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 8),
 
               const Text(
-                'Wisata Jogja', // Judul utama halaman
+                'Wisata Jogja',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
 
               const SizedBox(height: 16),
 
-              // Kolom pencarian dan ikon filter
+              // Kolom pencarian dan tombol filter
               Row(
                 children: [
                   // TextField pencarian
@@ -247,7 +248,7 @@ class HomePage extends StatelessWidget {
                       decoration: InputDecoration(
                         hintText: 'Search...',
                         filled: true,
-                        fillColor: Colors.grey[200], // Background abu-abu
+                        fillColor: Colors.grey[200],
                         prefixIcon: const Icon(Icons.search),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -257,7 +258,8 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  // Ikon filter (tune)
+
+                  // Tombol filter
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
@@ -271,7 +273,6 @@ class HomePage extends StatelessWidget {
 
               const SizedBox(height: 24),
 
-              // Teks judul bagian tempat populer
               const Text(
                 'Popular locations',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -279,21 +280,21 @@ class HomePage extends StatelessWidget {
 
               const SizedBox(height: 12),
 
-              // GridView berisi daftar wisata
+              // GridView untuk menampilkan daftar wisata
               Expanded(
                 child: GridView.builder(
-                  itemCount: wisataJogja.length, // Jumlah item
+                  itemCount: wisataJogja.length, // Jumlah item di daftar
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, // 2 kolom per baris
-                    childAspectRatio: 0.85,
+                    crossAxisCount: 2, // 2 kolom dalam satu baris
+                    childAspectRatio: 0.85, // Rasio lebar terhadap tinggi item
                     mainAxisSpacing: 12,
                     crossAxisSpacing: 12,
                   ),
                   itemBuilder: (context, index) {
-                    final place = wisataJogja[index]; // Ambil data tempat wisata
+                    final place = wisataJogja[index];
                     return GestureDetector(
                       onTap: () {
-                        // Navigasi ke halaman detail saat diklik
+                        // Navigasi ke halaman detail ketika item diklik
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -307,16 +308,16 @@ class HomePage extends StatelessWidget {
                         );
                       },
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(16), // Membuat gambar membulat
+                        borderRadius: BorderRadius.circular(16),
                         child: Stack(
                           fit: StackFit.expand,
                           children: [
-                            // Gambar tempat wisata
+                            // Gambar destinasi
                             Image.asset(
                               place['image']!,
-                              fit: BoxFit.cover,
+                              fit: BoxFit.cover, // Gambar menyesuaikan ukuran container
                             ),
-                            // Efek gradasi hitam di bawah
+                            // Overlay gradasi hitam transparan untuk teks terlihat jelas
                             Container(
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
@@ -329,7 +330,7 @@ class HomePage extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            // Nama dan lokasi ditampilkan di bawah gambar
+                            // Nama dan lokasi di bagian bawah gambar
                             Positioned(
                               bottom: 10,
                               left: 10,
